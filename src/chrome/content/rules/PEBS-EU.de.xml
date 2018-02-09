@@ -1,7 +1,0 @@
-<ruleset name="PEBS-EU.de">
-
-	<target host="www.pebs-eu.de" />
-
-	<rule from="^http:" to="https:" />
-
-</ruleset>

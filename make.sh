@@ -57,9 +57,9 @@ do_not_ship="*.py *.xml"
 rm -f $do_not_ship
 cd ../..
 
-python2.7 ./utils/merge-rulesets.py || exit 1
+. ./utils/merge-rulesets.sh || exit 1
 
-cp src/chrome/content/rules/default.rulesets pkg/crx/rules/default.rulesets
+cp src/$RULESETS pkg/crx/rules/default.rulesets
 
 sed -i -e "s/VERSION/$VERSION/g" pkg/crx/manifest.json
 
@@ -109,8 +109,7 @@ trap 'rm -f "$pub" "$sig" "$zip"' EXIT
 
 # zip up the crx dir
 cwd=$(pwd -P)
-(cd "$dir" && ../../utils/create_zip.py -n "$cwd/$zip" -x "../../.build_exclusions" .)
-echo >&2 "CWS crx package has sha1sum: `sha1sum "$cwd/$zip"`"
+(cd "$dir" && ../../utils/create_xpi.py -n "$cwd/$zip" -x "../../.build_exclusions" .)
 
 # signature
 openssl sha1 -sha1 -binary -sign "$key" < "$zip" > "$sig"
@@ -148,7 +147,7 @@ dir=pkg/xpi-amo
 zip="$name.zip"
 
 cwd=$(pwd -P)
-(cd "$dir" && ../../utils/create_zip.py -n "$cwd/$zip" -x "../../.build_exclusions" .)
+(cd "$dir" && ../../utils/create_xpi.py -n "$cwd/$zip" -x "../../.build_exclusions" .)
 echo >&2 "AMO xpi package has sha1sum: `sha1sum "$cwd/$zip"`"
 
 cp $zip $xpi_amo
@@ -161,7 +160,7 @@ dir=pkg/xpi-eff
 zip="$name.zip"
 
 cwd=$(pwd -P)
-(cd "$dir" && ../../utils/create_zip.py -n "$cwd/$zip" -x "../../.build_exclusions" .)
+(cd "$dir" && ../../utils/create_xpi.py -n "$cwd/$zip" -x "../../.build_exclusions" .)
 echo >&2 "EFF xpi package has sha1sum: `sha1sum "$cwd/$zip"`"
 
 cp $zip $xpi_eff

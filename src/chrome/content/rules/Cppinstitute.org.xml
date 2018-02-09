@@ -1,7 +1,0 @@
-<ruleset name="Cppinstitute.org">
-	<target host="cppinstitute.org" />
-	<target host="www.cppinstitute.org" />
-	<target host="education.cppinstitute.org" />
-
-	<rule from="^http:" to="https:" />
-</ruleset>

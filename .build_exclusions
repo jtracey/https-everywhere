@@ -16,4 +16,3 @@ webextension/chrome-resources/update-from-chrome-svn.sh
 .eslintrc.json
 webextension/.eslintrc.json
 .eslintignore
-node_modules
